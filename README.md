@@ -51,6 +51,7 @@ To get started:
   cd memomemo
   npm run dev
 ```
+
 正常にVue画面が表示されたら、gitにコミット
 
 
@@ -69,31 +70,6 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-## Vueプロジェクト設定
-
-「webpack.config.js」ファイルを設定
-```js
-    publicPath: '/dist/',
->    publicPath: '/', // 更新
-
-...
-  devServer: {
-    contentBase: 'dist', // 追加
-
-...
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
->    new webpack.optimize.UglifyJsPlugin({
->      sourceMap: false,
-
-```
-
-「../dist」ディレクトリを作成し、そこにinde.html を移動  
-inde.html の build.js 読み込み部分を下記に編集
-```
-<script src="./build.js"></script>
-```
 
 # Firebaseプロジェクトを作成
 
@@ -128,27 +104,23 @@ rm your choices.
  ( ) Storage: Deploy Cloud Storage security rules
 ```
 
-現在のディレクトリに紐づけるプロジェクトを選択  
-Firebaseコンソールから作成したプロジェクトを選択したいので、ひとまず[don't setup a default project]を選択
+コンソールから作成したプロジェクトを選択
 ```bash
-? Select a default Firebase project for this directory: (Use arrow keys)
-> [don't setup a default project]
-  fir-xxxx (Firebase)
-  fir-demo-project (Firebase Demo Project)
+? Select a default Firebase project for this directory:
+  [don't setup a default project]
+  fir-84a0c (Firebase)
+> memomemo-e1fe0 (memomemo)
   [create a new project]
 ```
 
-Hostingの公開ディレクトリは、「dist」を使うので dist と入力して Enter
+- Hostingの公開ディレクトリ(public)にするか聞かれているので、「dist」にしてEnter
+- SPA（シングルページアプリケーション）として設定（すべてのURLを/index.htmlにアクセス）するか
+聞かれているので、そのままEnter
+- index.htmlを上書きするか聞かれているので「No」でEnter
 ```bash
-? What do you want to use as your public directory? (public)
-> dist
-```
-
-SPA（シングルページアプリケーション）として設定（すべてのURLを/index.htmlにアクセス）するか
-聞かれているので N で Enter
-```bash
-? Configure as a single-page app (rewrite all urls to /index.html)? (y/N)
-> N
+? What do you want to use as your public directory? dist
+? Configure as a single-page app (rewrite all urls to /index.html)? Yes
+? File dist/index.html already exists. Overwrite? No
 ```
 
 Firebaseの初期化が完了
@@ -156,21 +128,8 @@ Firebaseの初期化が完了
 +  Firebase initialization complete!
 ```
 
-現在のディレクトリをFirebaseプロジェクトに紐づけたいので  
-Firebaseコンソールから作成したプロジェクトを確認。
-```bash
-> firebase list
-```
+ここでgitにコミット
 
-Firebaseコンソールから作成したプロジェクトのProject IDを設定
-```bash
-> firebase use memomemo-e1fe0
-```
-
-対象のプロジェクトが設定されているか確認
-```bash
-> firebase use
-```
 
 ## Firebaseプロジェクト設定
 Firebaseコンソールの「Authentication」から「ウェブ設定」ボタンを押下し、スクリプトタグをコピー
@@ -181,6 +140,33 @@ Firebaseコンソールの「Authentication」から「ウェブ設定」ボタ�
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     ...
 ```
+
+## Vueプロジェクト設定
+
+「webpack.config.js」ファイルを設定
+```js
+    publicPath: '/dist/',
+>    publicPath: '/', // 更新
+
+...
+  devServer: {
+    contentBase: 'dist', // 追加
+
+...
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+>    new webpack.optimize.UglifyJsPlugin({
+>      sourceMap: false,
+
+```
+
+「../dist」ディレクトリを作成し、そこにinde.html を移動  
+inde.html の build.js 読み込み部分を下記に編集
+```
+<script src="./build.js"></script>
+```
+
+
 
 ## 作成したFirebaseプロジェクトを公開
 
