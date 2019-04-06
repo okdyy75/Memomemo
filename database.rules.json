@@ -1,0 +1,18 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "users": {
+      ".read": true,
+      ".write": true,
+      "$userId": {
+        ".read": true,
+        ".write": "auth != null"
+      }
+    },
+    "memos": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
