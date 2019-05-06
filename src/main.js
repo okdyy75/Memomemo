@@ -9,7 +9,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false
 
-var firebase = require('firebase');
+import firebase from 'firebase/app';
 firebase.initializeApp(process.env.FIREBASE_CONFIG);
 
 Vue.use(Vuetify)

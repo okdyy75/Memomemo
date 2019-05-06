@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-content>
-      <div v-if="!isLogin">
+      <div v-if="!isLogin || loginUser.displayName=='ゲスト'">
         <Login></Login>
       </div>
-      <div v-else>
+      <div v-if="isLogin || loginUser.displayName=='ゲスト'">
         <h1>シェアメモ一覧</h1>
 
         <v-select
@@ -15,9 +15,9 @@
           class="ma-1"
         ></v-select>
         <v-list>
-          <v-list-tile v-for="(memo, index) in memos" :key="index" :to="'/memos/' + memo.memoid">
+          <v-list-tile v-for="(memo, index) in memos" :key="index" :to="'/memos/' + memo.memoid" :memo_uid="memo.uid">
             <v-list-tile-avatar>
-              <v-img v-if="memo.user" :src="memo.user.photoURL"></v-img>
+              <v-img v-if="memo.user_info" :src="memo.user_info.photoURL"></v-img>
               <v-icon v-else>person</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
@@ -38,7 +38,10 @@
 </template>
 
 <script>
-var firebase = require("firebase");
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
+
 import Login from "@/components/Login.vue";
 
 export default {
@@ -46,7 +49,7 @@ export default {
   components: {
     Login: Login
   },
-  props: ["isLogin"],
+  props: ["isLogin", "loginUser"],
   data() {
     return this.init();
   },
@@ -92,16 +95,16 @@ export default {
           memosSnap.forEach(memoSnap => {
             var memo = memoSnap.val();
             var memoid = memoSnap.key;
+            var uid = memo.memo_info.created_uid;
+            memo.memoid = memoid;
 
             ps.push(
               new Promise(function(resolve, reject) {
                 firebaseDB
-                  .ref("users/" + memo.memo_info.created_uid + "/user_info")
+                  .ref("users/" + uid + "/user_info")
                   .once("value", userSnap => {
-                    var user_info = userSnap.val();
-                    var uid = userSnap.key;
-                    memo.user = user_info;
-                    memo.memoid = memoid;
+                    memo.uid = uid;
+                    memo.user_info = userSnap.val();
                     resolve(memo);
                   });
               })

@@ -50,7 +50,9 @@
 
 <script>
 import marked from "marked";
-var firebase = require("firebase");
+import firebase from 'firebase/app';
+import "firebase/auth"
+import "firebase/database"
 
 export default {
   name: "Mypage_Memo",
@@ -96,8 +98,6 @@ export default {
     memo_info.updated_uid = uid;
     memo_info.updated_at = this.getDateTime();
     memo_info.updated_at_desc = - this.getDateTime();
-
-
 
     console.log("メモ更新[uid:" + uid + "][memoid:" + memoid + "]", memo_info);
     this.loading = false;

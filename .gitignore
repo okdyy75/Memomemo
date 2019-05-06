@@ -1,4 +1,5 @@
 .DS_Store
+/.firebase/
 /config/
 /node_modules/
 /dist/

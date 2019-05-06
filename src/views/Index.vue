@@ -37,7 +37,7 @@
       </v-list>
     </v-navigation-drawer>
     <div>
-      <router-view :isLogin="isLogin"></router-view>
+      <router-view :isLogin="isLogin" :loginUser="loginUser"></router-view>
       <router-link v-if="loading && isLogin" :to="'/mypage/memos/'" class="addMemoBtn">
         <v-btn v-if="isLogin" fixed bottom left fab dark class="indigo">
           <v-icon>add</v-icon>
@@ -61,7 +61,10 @@
 </template>
 
 <script>
-var firebase = require("firebase");
+import firebase from 'firebase/app';
+import "firebase/auth"
+import "firebase/database"
+
 import Login from "@/components/Login.vue";
 import Logout from "@/components/Logout.vue";
 
@@ -145,7 +148,10 @@ export default {
         left: false,
         isLogin: false,
         displayName: "ゲスト",
-        loginUser: null,
+        loginUser: {
+          displayName: null,
+          photoURL: null
+        },
         memos: {},
         snackbar: true
       };

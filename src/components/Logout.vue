@@ -6,8 +6,11 @@
 </template>
 
 <script>
-var firebase = require("firebase");
-var util = require("@/utils/util");
+import firebase from 'firebase/app';
+import "firebase/auth"
+import "firebase/database"
+
+import util from "@/utils/util.js";
 
 export default {
   name: "Logout",

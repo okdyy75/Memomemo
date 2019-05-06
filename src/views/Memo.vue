@@ -64,7 +64,9 @@
 
 <script>
 import marked from "marked";
-var firebase = require("firebase");
+import firebase from 'firebase/app';
+import "firebase/auth"
+import "firebase/database"
 
 export default {
   name: "Memo",

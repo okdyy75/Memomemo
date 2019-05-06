@@ -5,19 +5,26 @@
 </template>
 
 <script>
-var firebase = require("firebase");
-var firebaseui = require("firebaseui-ja");
+import * as firebase from 'firebase/app';
+import "firebase/auth"
+import "firebase/database"
+import firebaseui from 'firebaseui-ja';
 require("firebaseui-ja/dist/firebaseui.css");
 
-var util = require("@/utils/util");
+import util from "@/utils/util.js";
 
 export default {
   name: "Login",
+  data() {
+    return {
+      fbui: firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())
+    };
+  },
   mounted() {
     console.log("Login_mounted");
     var vm = this;
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start("#firebaseui-auth-container", {
+
+    this.fbui.start("#firebaseui-auth-container", {
       callbacks: {
         uiShown: function() {
           console.log("uiShown");
@@ -25,15 +32,10 @@ export default {
         signInSuccessWithAuthResult: function(authResult, redirectUrl) {
           console.log("signInSuccessWithAuthResult", authResult, redirectUrl);
 
-          var isNewUser = authResult.additionalUserInfo.isNewUser;
-          var displayName = authResult.user.displayName;
-          var photoURL = authResult.user.photoURL;
-          var loginProviderId = null;
-
-          // SNSログイン＆登録済みであればスキップ
-          if (!isNewUser && displayName != "ゲスト") {
-            return true;
-          }
+          var isNewUser = authResult.additionalUserInfo.isNewUser || null;
+          var displayName = authResult.user.displayName || null;
+          var photoURL = authResult.user.photoURL || null;
+          var loginProviderId = authResult.additionalUserInfo.providerId || null;
 
           switch (authResult.additionalUserInfo.providerId) {
             case firebase.auth.GoogleAuthProvider.PROVIDER_ID: // OK
@@ -58,10 +60,6 @@ export default {
               photoURL = "";
               break;
           }
-
-          displayName = displayName || authResult.user.displayName;
-          photoURL = photoURL || authResult.user.photoURL;
-          loginProviderId = authResult.additionalUserInfo.providerId || null;
 
           var uid = authResult.user.uid;
           var user = {
