@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-content>
-      <div v-if="!isLogin || loginUser.displayName=='ゲスト'">
+      <div v-if="!isLogin">
         <Login></Login>
       </div>
-      <div v-if="isLogin || loginUser.displayName=='ゲスト'">
+      <div v-if="isLogin">
         <h1>シェアメモ一覧</h1>
 
         <v-select

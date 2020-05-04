@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <v-toolbar dark fixed app class="blue-grey">
-      <v-toolbar-side-icon @click.stop="leftDrawer = !leftDrawer;loading=false;"></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click.stop="leftDrawer = true;loading=false;"></v-toolbar-side-icon>
       <v-toolbar-title class="ml-0">
         <router-link to="/" class="toolbar-title subheading">MemoMemo</router-link>
       </v-toolbar-title>
       <Logout v-if="isLogin"></Logout>
     </v-toolbar>
-    <v-navigation-drawer v-model="leftDrawer" fixed>
+    <v-navigation-drawer v-model="leftDrawer" absolute temporary>
       <v-list v-if="!isLogin" class="pa-0">
         <v-list-tile>
           <v-list-tile-content>ログインするとメモできます</v-list-tile-content>
