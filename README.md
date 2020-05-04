@@ -263,3 +263,7 @@ npm install material-design-icons-iconfont --save
 +  Firebase initialization complete!
 
 ```
+
+# ローカル開発環境
+1. 「config/dev.env.js」に環境変数を設定する
+2. `npm run dev`
