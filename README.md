@@ -2,6 +2,11 @@
 メモ共有サイト  
 [MemoMemo](https://memomemo-e1fe0.firebaseapp.com)  
 
+# 環境
+- Node.js　10.15.0
+- Vue.js　　2.6.11
+- Vuetify  1.5.24
+- Firebase　5.11.1
 
 ## 概要
 プライベート・共有メモの作成  
@@ -82,11 +87,6 @@ SNSログインまたはゲストログインが必須
   }
 }
 ```
-
-# 環境
-- Node.js　v10.15.0
-- Vue.js　　2.9.6
-- Firebase　6.3.1
 
 # 環境構築
 
