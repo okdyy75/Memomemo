@@ -8,6 +8,7 @@ import Mypage_Memo from '@/views/Mypage_Memo'
 
 Vue.use(VueRouter);
 const vueRouter = new VueRouter({
+  mode:'history',
   routes: [
     {
       path: '/',
