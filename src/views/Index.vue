@@ -40,7 +40,7 @@
       <router-view :isLogin="isLogin" :loginUser="loginUser"></router-view>
       <router-link v-if="loading && isLogin" :to="'/mypage/memos/'" class="addMemoBtn">
         <v-btn v-if="isLogin" fixed bottom left fab dark class="indigo">
-          <v-icon>add</v-icon>
+          <v-icon style="height: auto;">add</v-icon>
         </v-btn>
       </router-link>
     </div>
