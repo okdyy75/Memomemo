@@ -41,7 +41,7 @@
       </v-btn>
 
       <v-btn fab fixed bottom right v-on:click="deleteMemo()" class="error">
-        <v-icon dark>delete</v-icon>
+        <v-icon dark style="height: auto;">delete</v-icon>
       </v-btn>
     </v-content>
   </v-container>
