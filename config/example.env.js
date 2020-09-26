@@ -1,6 +1,5 @@
 'use strict'
 module.exports = {
-  NODE_ENV: '"local"',
   FIREBASE_CONFIG : {
     apiKey: '"<apiKey>"',
     authDomain: '"<projectId>.firebaseapp.com"',
